@@ -1,133 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catalogue Gallery</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Furniture Catalogue</title>
 
-    header {
-      background: #333;
-      color: #fff;
-      padding: 1rem;
-      text-align: center;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #fff;
+}
 
-    .container {
-      padding: 20px;
-    }
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  border-bottom: 1px solid #eee;
+}
 
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 15px;
-    }
+header h1 {
+  font-size: 22px;
+}
 
-    .card {
-      background: #fff;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      transition: transform 0.3s;
-    }
+nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #333;
+}
 
-    .card:hover {
-      transform: scale(1.05);
-    }
+.hero {
+  height: 60vh;
+  background: url('https://via.placeholder.com/1200x600') center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
 
-    .card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
+.hero h2 {
+  font-size: 40px;
+  background: rgba(0,0,0,0.5);
+  padding: 20px;
+}
 
-    .card-content {
-      padding: 15px;
-    }
+.container {
+  padding: 40px;
+}
 
-    .card-title {
-      font-size: 18px;
-      margin: 0 0 10px;
-    }
+.section-title {
+  text-align: center;
+  margin-bottom: 30px;
+}
 
-    .card-price {
-      color: green;
-      font-weight: bold;
-    }
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
 
-    @media (max-width: 600px) {
-      .card img {
-        height: 150px;
-      }
-    }
-  </style>
+.card {
+  border: 1px solid #eee;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 15px;
+}
+
+.card-title {
+  font-size: 16px;
+}
+
+.card-price {
+  color: #b12704;
+  font-weight: bold;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #111;
+  color: #fff;
+}
+
+@media(max-width: 768px) {
+  .hero h2 { font-size: 28px; }
+}
+</style>
 </head>
+
 <body>
 
 <header>
-  <h1>My Catalogue</h1>
+  <h1>FurniShop</h1>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Shop</a>
+    <a href="#">Contact</a>
+  </nav>
 </header>
 
-<div class="container">
-  <div class="gallery" id="gallery"></div>
-</div>
+<section class="hero">
+  <h2>Modern Furniture Collection</h2>
+</section>
 
-<script>
-// Example catalogue data (can come from PHP)
-const items = [
-  { title: "Product 1", price: "$10", image: "https://via.placeholder.com/300" },
-  { title: "Product 2", price: "$20", image: "https://via.placeholder.com/300" },
-  { title: "Product 3", price: "$30", image: "https://via.placeholder.com/300" },
-  { title: "Product 4", price: "$40", image: "https://via.placeholder.com/300" }
-];
+<section class="container">
+  <h2 class="section-title">Our Products</h2>
+  <div class="gallery">
 
-const gallery = document.getElementById("gallery");
+    <?php
+    $items = [
+      ["title"=>"Sofa","price"=>"$200","image"=>"https://via.placeholder.com/300"],
+      ["title"=>"Chair","price"=>"$80","image"=>"https://via.placeholder.com/300"],
+      ["title"=>"Table","price"=>"$150","image"=>"https://via.placeholder.com/300"],
+      ["title"=>"Bed","price"=>"$400","image"=>"https://via.placeholder.com/300"]
+    ];
 
-items.forEach(item => {
-  const card = document.createElement("div");
-  card.classList.add("card");
+    foreach($items as $item) {
+      echo "
+      <div class='card'>
+        <img src='{$item['image']}'>
+        <div class='card-content'>
+          <p class='card-title'>{$item['title']}</p>
+          <p class='card-price'>{$item['price']}</p>
+        </div>
+      </div>";
+    }
+    ?>
 
-  card.innerHTML = `
-    <img src="${item.image}" alt="${item.title}">
-    <div class="card-content">
-      <h3 class="card-title">${item.title}</h3>
-      <p class="card-price">${item.price}</p>
-    </div>
-  `;
+  </div>
+</section>
 
-  gallery.appendChild(card);
-});
-</script>
+<footer>
+  <p>© 2026 FurniShop - All rights reserved</p>
+</footer>
 
 </body>
 </html>
-
-
-<!-- PHP VERSION (save as index.php if using server) -->
-<?php
-$items = [
-  ["title" => "Product 1", "price" => "$10", "image" => "https://via.placeholder.com/300"],
-  ["title" => "Product 2", "price" => "$20", "image" => "https://via.placeholder.com/300"],
-  ["title" => "Product 3", "price" => "$30", "image" => "https://via.placeholder.com/300"],
-  ["title" => "Product 4", "price" => "$40", "image" => "https://via.placeholder.com/300"]
-];
-?>
-
-<div class="container">
-  <div class="gallery">
-    <?php foreach($items as $item): ?>
-      <div class="card">
-        <img src="<?php echo $item['image']; ?>" alt="">
-        <div class="card-content">
-          <h3 class="card-title"><?php echo $item['title']; ?></h3>
-          <p class="card-price"><?php echo $item['price']; ?></p>
-        </div>
-      </div>
-    <?php endforeach; ?>
-  </div>
-</div>
